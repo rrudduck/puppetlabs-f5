@@ -12,9 +12,16 @@
 #
 class f5::params {
   if $::puppetversion =~ /Puppet Enterprise/ {
-    $owner    = 'pe-puppet'
-    $group    = 'pe-puppet'
-    $provider = 'pe_gem'
+    if $::kernel == 'windows' {
+      $owner    = 'S-1-5-18'
+      $group    = 'S-1-5-18'
+      $provider = 'pe_gem'
+    }
+    else {
+      $owner    = 'pe-puppet'
+      $group    = 'pe-puppet'
+      $provider = 'pe_gem'
+    }
   } else {
     $owner    = 'puppet'
     $group    = 'puppet'
